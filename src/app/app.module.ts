@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EventModule } from './event/event.module';
 import { HomeComponent } from './home/home.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
@@ -29,6 +30,7 @@ import { TeamModule } from './team/team.module';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
+    EventModule,
     OrganizationModule,
     PlayerModule,
     SidePanelModule,
