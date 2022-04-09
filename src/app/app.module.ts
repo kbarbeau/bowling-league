@@ -12,6 +12,7 @@ import { MainHeaderComponent } from './main-header/main-header.component';
 import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
 import { PlayerModule } from './player/player.module';
 import { SidePanelModule } from './side-panel/side-panel.module';
+import { TeamModule } from './team/team.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SidePanelModule } from './side-panel/side-panel.module';
     BrowserAnimationsModule,
     PlayerModule,
     SidePanelModule,
+    TeamModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
