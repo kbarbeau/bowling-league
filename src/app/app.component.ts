@@ -4,19 +4,11 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <button mat-flat-button color="primary">Material Button</button>
-    <button mat-button color="primary">Primary</button>
-    <ul>
-      <li *ngFor="let player of player$ | async">
-        {{ player.name }}
-      </li>
-    </ul>
-  `,
   styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'bowling-league';
+  title = 'Game manager';
   player$: Observable<any[]>;
   constructor(firestore: Firestore) {
     const players = collection(firestore, 'players');
