@@ -1,1 +1,22 @@
-<p>organization-list works!</p>
+<app-actions-group class="_actions-group" end>
+  <a mat-flat-button color="primary">Create Organization</a>
+</app-actions-group>
+
+<table mat-table [dataSource]="test" class="_table">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <a mat-button color="primary">Edit</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['name', 'actions'];"></tr>
+</table>

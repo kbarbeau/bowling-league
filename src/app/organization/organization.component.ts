@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-organization',
+  styleUrls: ['./organization.component.scss'],
   templateUrl: './organization.component.html',
-  styleUrls: ['./organization.component.scss']
 })
 export class OrganizationComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
