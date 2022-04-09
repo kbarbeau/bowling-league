@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
+import { OrganizationModule } from './organization/organization.module';
 import { PlayerModule } from './player/player.module';
 import { SidePanelModule } from './side-panel/side-panel.module';
 import { TeamModule } from './team/team.module';
@@ -28,6 +29,7 @@ import { TeamModule } from './team/team.module';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
+    OrganizationModule,
     PlayerModule,
     SidePanelModule,
     TeamModule,

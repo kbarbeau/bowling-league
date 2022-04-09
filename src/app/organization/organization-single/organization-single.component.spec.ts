@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrganisationSingleComponent } from './organisation-single.component';
+import { OrganizationSingleComponent } from './organization-single.component';
 
-describe('OrganisationSingleComponent', () => {
-  let component: OrganisationSingleComponent;
-  let fixture: ComponentFixture<OrganisationSingleComponent>;
+describe('OrganizationSingleComponent', () => {
+  let component: OrganizationSingleComponent;
+  let fixture: ComponentFixture<OrganizationSingleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrganisationSingleComponent ]
+      declarations: [ OrganizationSingleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrganisationSingleComponent);
+    fixture = TestBed.createComponent(OrganizationSingleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
