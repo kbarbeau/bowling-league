@@ -7,8 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Game manager';
+  items: any;
 
-  constructor() {}
+  constructor() {
+    // this.items = db.list('items').valueChanges();
+  }
 
   ngOnInit(): void {}
 }

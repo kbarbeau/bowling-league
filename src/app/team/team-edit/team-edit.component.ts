@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { doc, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
-import { addDoc, collection } from 'firebase/firestore';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  addDoc,
+  collection,
+  DocumentData,
+  DocumentReference,
+  updateDoc,
+} from 'firebase/firestore';
 import { TeamEditService } from '../services/team-edit.service';
 
 @Component({
@@ -10,19 +17,54 @@ import { TeamEditService } from '../services/team-edit.service';
   templateUrl: './team-edit.component.html',
 })
 export class TeamEditComponent implements OnInit {
-  fg: FormGroup = this.TeamEditSvc.initForm();
+  fg: FormGroup;
+  id?: string = '';
+  pageTitle: string = '';
+  teamDocument: DocumentReference<DocumentData>;
   teamsCollection;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private firestore: Firestore,
     private TeamEditSvc: TeamEditService
   ) {
     this.teamsCollection = collection(this.firestore, 'teams');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setupObservers();
+  }
+
+  setupData(params: Params): void {
+    if (params['id']) {
+      this.setupDocument(params['id']);
+    } else {
+      this.fg = this.TeamEditSvc.initForm();
+      this.pageTitle = 'Create a Team';
+    }
+  }
+
+  setupDocument(id: string): void {
+    this.id = id;
+    this.pageTitle = 'Edit Team';
+    this.teamDocument = doc(this.firestore, `teams/${this.id}`);
+
+    onSnapshot(
+      this.teamDocument,
+      (docSnap) => (this.fg = this.TeamEditSvc.initForm(docSnap.data()))
+    );
+  }
+
+  setupObservers(): void {
+    this.route.params.subscribe((params) => this.setupData(params));
+  }
 
   onSubmit(): void {
-    addDoc(this.teamsCollection, this.fg.value);
+    this.id
+      ? updateDoc(this.teamDocument, this.fg?.value)
+      : addDoc(this.teamsCollection, this.fg?.value);
+
+    this.router.navigate(['/team']);
   }
 }

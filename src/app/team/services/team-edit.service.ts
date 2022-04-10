@@ -9,9 +9,14 @@ export class TeamEditService {
   constructor(private fb: FormBuilder) {}
 
   initForm(team?: Team): FormGroup {
-    return this.fb.group({
-      description: [''],
-      name: ['', Validators.required],
-    });
+    return team
+      ? this.fb.group({
+          description: [team.description],
+          name: [team.name, Validators.required],
+        })
+      : this.fb.group({
+          description: [''],
+          name: ['', Validators.required],
+        });
   }
 }

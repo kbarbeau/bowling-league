@@ -1,5 +1,5 @@
-<form [formGroup]="fg" class="_form" (submit)="onSubmit()">
-  <h2>Create a Team</h2>
+<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
+  <h2>{{ pageTitle }}</h2>
 
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>

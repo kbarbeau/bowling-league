@@ -13,8 +13,8 @@ export class TeamListComponent implements OnInit {
   teams: Observable<any>;
 
   constructor(firestore: Firestore) {
-    const col = collection(firestore, 'teams');
-    this.teams = collectionData(col);
+    const ref = collection(firestore, 'teams');
+    this.teams = collectionData(ref, { idField: 'id' });
   }
 
   ngOnInit(): void {}
