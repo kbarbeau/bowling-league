@@ -1,1 +1,17 @@
-<p>team-edit works!</p>
+<form [formGroup]="fg" class="_form" (submit)="onSubmit()">
+  <h2>Create a Team</h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput autocomplete="off" formControlName="name" type="text">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <app-actions-group>
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+  </app-actions-group>
+</form>

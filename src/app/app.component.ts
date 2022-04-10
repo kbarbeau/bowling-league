@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Game manager';
-  player$: Observable<any[]>;
-  constructor(firestore: Firestore) {
-    const players = collection(firestore, 'players');
-    this.player$ = collectionData(players);
-  }
+
+  constructor() {}
+
+  ngOnInit(): void {}
 }
