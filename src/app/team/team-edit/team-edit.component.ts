@@ -5,10 +5,12 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   addDoc,
   collection,
+  CollectionReference,
   DocumentData,
   DocumentReference,
   updateDoc,
 } from 'firebase/firestore';
+import { TSport } from '../interfaces/team';
 import { TeamEditService } from '../services/team-edit.service';
 
 @Component({
@@ -20,8 +22,9 @@ export class TeamEditComponent implements OnInit {
   fg: FormGroup;
   id?: string = '';
   pageTitle: string = '';
+  sports: TSport[] = ['baseball', 'bowling', 'hockey'];
   teamDocument: DocumentReference<DocumentData>;
-  teamsCollection;
+  teamsCollection: CollectionReference<DocumentData>;
 
   constructor(
     private route: ActivatedRoute,

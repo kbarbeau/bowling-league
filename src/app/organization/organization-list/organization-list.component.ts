@@ -3,7 +3,7 @@ import {
   collection,
   collectionData,
   DocumentData,
-  Firestore,
+  Firestore
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class OrganizationListComponent implements OnInit {
 
   constructor(firestore: Firestore) {
     const organizations = collection(firestore, 'organizations');
-    this.organization$ = collectionData(organizations);
+    this.organization$ = collectionData(organizations, { idField: 'id' });
   }
 
   ngOnInit(): void {

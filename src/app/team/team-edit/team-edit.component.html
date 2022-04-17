@@ -11,7 +11,15 @@
     <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
 
+  <mat-form-field appearance="outline">
+    <mat-label>Sport</mat-label>
+    <mat-select formControlName="sport">
+      <mat-option *ngFor="let sport of sports" [value]="sport">{{sport}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <app-actions-group>
+    <a mat-button color="primary" [routerLink]="['/team']">Cancel</a>
     <button mat-flat-button color="primary" type="submit">Submit</button>
   </app-actions-group>
 </form>

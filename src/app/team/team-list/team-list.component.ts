@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./team-list.component.scss'],
 })
 export class TeamListComponent implements OnInit {
-  @Input() showColumns: string[] = ['name', 'actions']; // Used to show or hide columns
+  @Input() showColumns: string[] = ['name', 'sport', 'actions']; // Used to show or hide columns
 
   teams: Observable<any>;
 

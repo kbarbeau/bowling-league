@@ -1,5 +1,5 @@
 <app-actions-group class="_actions-group" end>
-  <a mat-flat-button color="primary">Create Organization</a>
+  <a mat-flat-button color="primary" [routerLink]="['add']">Create Organization</a>
 </app-actions-group>
 
 <table mat-table [dataSource]="test" class="_table">
@@ -13,7 +13,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <a mat-button color="primary">Edit</a>
+      <a mat-button color="primary" [routerLink]="['edit/' + element.id]">Edit</a>
     </td>
   </ng-container>
 
