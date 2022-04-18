@@ -1,1 +1,50 @@
-<p>event-edit works!</p>
+<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
+  <h2>{{ pageTitle }}</h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput autocomplete="off" formControlName="name" type="text">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Start Date</mat-label>
+    <input matInput autocomplete="off" formControlName="date" type="datetime-local">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location" type="text">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Event Type</mat-label>
+    <select matNativeControl formControlName="type">
+      <option disabled selected value="">Select</option>
+      <option value="game">Game</option>
+      <option value="practice">Practice</option>
+      <option value="other">Other</option>
+    </select>
+  </mat-form-field>
+
+  <ng-container *ngIf="fg.controls['type'].value === 'game'">
+    <mat-form-field appearance="outline">
+      <mat-label>Home Team</mat-label>
+      <input matInput formControlName="homeTeam" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Away Team</mat-label>
+      <input matInput formControlName="awayTeam" type="text">
+    </mat-form-field>
+  </ng-container>
+
+  <app-actions-group>
+    <a mat-button color="primary" [routerLink]="['/event']">Cancel</a>
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+  </app-actions-group>
+</form>

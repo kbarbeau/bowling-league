@@ -1,1 +1,22 @@
-<p>event-list works!</p>
+<app-actions-group class="_actions-group" end>
+  <a mat-flat-button color="primary" [routerLink]="['add']">Create an Event</a>
+</app-actions-group>
+
+<table mat-table [dataSource]="events | async" class="_table">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+        <a mat-button color="primary" [routerLink]="['edit/' + element.id]">Edit</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="showColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: showColumns;"></tr>
+</table>
