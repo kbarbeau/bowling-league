@@ -13,6 +13,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EventEditService } from '../services/event-edit.service';
+import { START_DATE_MAX, START_DATE_MIN } from './event-edit.constant';
 
 @Component({
   selector: 'app-event-edit',
@@ -20,11 +21,13 @@ import { EventEditService } from '../services/event-edit.service';
   styleUrls: ['./event-edit.component.scss'],
 })
 export class EventEditComponent implements OnInit {
+  eventsCollection: CollectionReference<DocumentData>;
+  eventDocument: DocumentReference<DocumentData>;
   fg: FormGroup;
   id?: string = '';
   pageTitle: string = '';
-  eventDocument: DocumentReference<DocumentData>;
-  eventsCollection: CollectionReference<DocumentData>;
+  startDateMax: string = START_DATE_MAX;
+  startDateMin: string = START_DATE_MIN;
 
   constructor(
     private route: ActivatedRoute,

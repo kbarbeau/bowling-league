@@ -3,11 +3,23 @@
 </app-actions-group>
 
 <table mat-table [dataSource]="events | async" class="_table">
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{(element.date | date: 'short') || '-'}}</td>
+    </ng-container>
+
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">{{element.name}}</td>
   </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{element.type ?? '-'}}</td>
+    </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">

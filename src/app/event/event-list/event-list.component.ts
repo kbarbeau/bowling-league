@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./event-list.component.scss'],
 })
 export class EventListComponent implements OnInit {
-  @Input() showColumns: string[] = ['name', 'actions']; // Used to show or hide columns
+  @Input() showColumns: string[] = ['date', 'name', 'type', 'actions']; // Used to show or hide columns
 
   events: Observable<DocumentData[]>;
 
