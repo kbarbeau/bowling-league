@@ -1,5 +1,16 @@
-<app-main-header></app-main-header>
-<app-main-wrapper>
-  <router-outlet></router-outlet>
-</app-main-wrapper>
-<app-main-footer></app-main-footer>
+<mat-drawer-container class="_app-container">
+  <mat-drawer #drawer>
+    <app-side-panel></app-side-panel>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <!-- HEADER -->
+    <app-main-header></app-main-header>
+    <!-- MAIN CONTENT WRAPPER -->
+    <app-main-wrapper>
+      <router-outlet></router-outlet>
+    </app-main-wrapper>
+    <!-- FOOTER -->
+    <app-main-footer></app-main-footer>
+  </mat-drawer-content>
+</mat-drawer-container>

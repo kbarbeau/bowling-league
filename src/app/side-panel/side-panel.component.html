@@ -1,1 +1,7 @@
-<p>side-panel works!</p>
+<a mat-icon-button
+  class="_btn-close"
+  [routerLink]="['', { outlets: { side: null } }]">
+  <mat-icon>close</mat-icon>
+</a>
+
+<router-outlet name="side"></router-outlet>

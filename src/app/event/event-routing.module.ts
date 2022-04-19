@@ -11,17 +11,21 @@ const routes: Routes = [
         component: EventListComponent,
         path: '',
       },
-      {
-        component: EventEditComponent,
-        path: 'add',
-      },
-      {
-        component: EventEditComponent,
-        path: 'edit/:id',
-      },
     ],
     component: EventComponent,
     path: 'event',
+  },
+  {
+    component: EventEditComponent,
+    data: { sidePanelMode: 'over', sidePanelPos: 'end' },
+    outlet: 'side',
+    path: 'event/add',
+  },
+  {
+    component: EventEditComponent,
+    data: { sidePanelMode: 'over', sidePanelPos: 'end' },
+    outlet: 'side',
+    path: 'event/edit/:id',
   },
 ];
 

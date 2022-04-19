@@ -14,23 +14,23 @@
   <ng-container *ngIf="fg.controls['type'].value === 'game'">
     <mat-form-field appearance="outline">
       <mat-label>Home Team</mat-label>
-      <input matInput formControlName="homeTeam" type="text">
+      <input matInput formControlName="homeTeam" name="home team name" type="text">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Away Team</mat-label>
-      <input matInput formControlName="awayTeam" type="text">
+      <input matInput formControlName="awayTeam" name="Away team name" type="text">
     </mat-form-field>
   </ng-container>
 
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
-    <input matInput autocomplete="off" formControlName="name" type="text">
+    <input matInput autocomplete="off" formControlName="name" name="title" type="text">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
+    <textarea matInput formControlName="description" name="description"></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -40,12 +40,13 @@
       formControlName="date"
       [max]="startDateMax"
       [min]="startDateMin"
+      name="date"
       type="datetime-local">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Location</mat-label>
-    <input matInput formControlName="location" type="text">
+    <input matInput formControlName="location" name="location" type="text">
   </mat-form-field>
 
   <app-actions-group>
