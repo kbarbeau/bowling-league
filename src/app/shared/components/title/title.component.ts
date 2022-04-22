@@ -8,21 +8,21 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-object-summary',
-  templateUrl: './object-summary.component.html',
-  styleUrls: ['./object-summary.component.scss'],
+  selector: 'app-title',
+  styleUrls: ['./title.component.scss'],
+  templateUrl: './title.component.html',
 })
-export class ObjectSummaryComponent implements OnInit {
+export class TitleComponent implements OnInit {
   @Input() class: string;
-  @Input() direction: 'column' | 'row' = 'row';
+  @Input() size: 'extra-large' | 'large' | 'medium' | 'small' = 'medium';
+  @Input() type: 'subtitle' | 'title' = 'title';
 
   @HostBinding('class')
   get hostClasses(): string {
     return [
       ...(this.class ? [this.class] : []), // include existing classes
-      ...(this.direction
-        ? [`object-summary--direction-${this.direction}`]
-        : []),
+      ...(this.size ? [`title--size-${this.size}`] : []),
+      ...(this.type ? [`title--type-${this.type}`] : []),
     ].join(' ');
   }
 

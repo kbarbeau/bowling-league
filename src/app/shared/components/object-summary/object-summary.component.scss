@@ -1,0 +1,30 @@
+:host {
+  align-items: center;
+  display: flex;
+}
+
+:host.object-summary--direction-column {
+  flex-direction: column;
+
+  ._content {
+    align-items: center;
+    margin-top: 12px;
+  }
+}
+
+:host.object-summary--direction-row {
+  flex-direction: row;
+
+  ._content {
+    margin-left: 12px;
+  }
+}
+
+._content {
+  display: flex;
+  flex-direction: column;
+}
+
+._options {
+  margin-left: auto;
+}

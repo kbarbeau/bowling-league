@@ -1,9 +1,19 @@
 <h1>Menu</h1>
 
 <mat-selection-list [formControl]="itemSelector" [multiple]="false">
-  <mat-list-option value="">Home</mat-list-option>
-  <mat-list-option value="organization">Organizations</mat-list-option>
-  <mat-list-option value="team">Teams</mat-list-option>
-  <mat-list-option value="player">Players</mat-list-option>
-  <mat-list-option value="event">Events</mat-list-option>
+  <mat-list-option value="">
+    <div class="_menu-item">
+      <mat-icon>home</mat-icon>Home
+    </div>
+  </mat-list-option>
+  <mat-list-option value="organization"><mat-icon>lan</mat-icon>Organizations</mat-list-option>
+  <mat-list-option value="team"><mat-icon>groups</mat-icon>Teams</mat-list-option>
+  <mat-list-option value="player"><mat-icon>sports_baseball</mat-icon>Players</mat-list-option>
+  <mat-list-option value="event"><mat-icon>scoreboard</mat-icon>>Events</mat-list-option>
 </mat-selection-list>
+
+<app-object-summary>
+  <img chipAvatar size="small" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+  <app-title>My dog name</app-title>
+  <app-title size="small" type="subtitle">Is Tito</app-title>
+</app-object-summary>

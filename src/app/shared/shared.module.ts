@@ -14,12 +14,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActionsGroupComponent } from './actions-group/actions-group.component';
+import { ChipAvatarComponent } from './components/chip-avatar/chip-avatar.component';
 import { ObjectSummaryComponent } from './components/object-summary/object-summary.component';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
-  declarations: [ActionsGroupComponent, ObjectSummaryComponent],
+  declarations: [
+    ActionsGroupComponent,
+    ObjectSummaryComponent,
+    ChipAvatarComponent,
+    TitleComponent,
+  ],
   exports: [
     ActionsGroupComponent,
+    ChipAvatarComponent,
     FormsModule,
     MatButtonModule,
     MatCardModule,
@@ -35,6 +43,7 @@ import { ObjectSummaryComponent } from './components/object-summary/object-summa
     MatToolbarModule,
     ObjectSummaryComponent,
     ReactiveFormsModule,
+    TitleComponent,
   ],
   imports: [
     CommonModule,

@@ -7,3 +7,12 @@
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 }
+
+._menu-item {
+  display: flex;
+  align-items: center;
+
+  .mat-icon {
+    margin-right: 12px;
+  }
+}
