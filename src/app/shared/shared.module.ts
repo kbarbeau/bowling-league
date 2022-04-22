@@ -33,6 +33,7 @@ import { ObjectSummaryComponent } from './components/object-summary/object-summa
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
+    ObjectSummaryComponent,
     ReactiveFormsModule,
   ],
   imports: [
