@@ -14,18 +14,21 @@ import { EventModule } from './event/event.module';
 import { HomeComponent } from './home/home.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
 import { OrganizationModule } from './organization/organization.module';
 import { PlayerModule } from './player/player.module';
+import { SharedModule } from './shared/shared.module';
 import { SidePanelModule } from './side-panel/side-panel.module';
 import { TeamModule } from './team/team.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainHeaderComponent,
-    MainWrapperComponent,
     MainFooterComponent,
+    MainHeaderComponent,
+    MainMenuComponent,
+    MainWrapperComponent,
     HomeComponent,
   ],
   imports: [
@@ -37,6 +40,7 @@ import { TeamModule } from './team/team.module';
     EventModule,
     OrganizationModule,
     PlayerModule,
+    SharedModule,
     SidePanelModule,
     TeamModule,
   ],

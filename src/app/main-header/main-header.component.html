@@ -1,1 +1,6 @@
-<p>main-header works!</p>
+<mat-toolbar class="_menu" color="primary">
+  <a mat-icon-button [routerLink]="['', { outlets: { side: 'menu' } }]">
+    <mat-icon>menu</mat-icon>
+  </a>
+  <span class="_title">My Bowling League</span>
+</mat-toolbar>

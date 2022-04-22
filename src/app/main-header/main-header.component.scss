@@ -1,7 +1,19 @@
 :host {
-  background-color: #673ab7;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+._menu {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+._title {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

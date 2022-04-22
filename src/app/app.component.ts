@@ -23,7 +23,6 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    console.log(this.drawer);
     this.drawer.openedChange
       .pipe(
         filter((open) => !open),
