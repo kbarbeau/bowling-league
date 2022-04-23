@@ -1,1 +1,7 @@
 <p>home works!</p>
+<label>
+  Import Image
+  <input [formControl]="fileControl" type="file" (change)="onFileChosen($event)">
+</label>
+
+<img chipAvatar *ngIf="selectedFile" [src]="selectedFile.name | getDownloadURL">

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {
   ErrorStateMatcher,
@@ -36,6 +38,7 @@ import { TeamModule } from './team/team.module';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     EventModule,
     OrganizationModule,
@@ -46,6 +49,7 @@ import { TeamModule } from './team/team.module';
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }, // Present Input error only if input is dirty and invalid
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig }, // Used for AngularFireStorage
   ],
   bootstrap: [AppComponent],
 })

@@ -1,21 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PlayerRoutingModule } from './player-routing.module';
+import { NgModule } from '@angular/core';
+import { GetDownloadURLPipeModule } from '@angular/fire/compat/storage';
+import { SharedModule } from '../shared/shared.module';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerListComponent } from './player-list/player-list.component';
+import { PlayerRoutingModule } from './player-routing.module';
 import { PlayerComponent } from './player.component';
 
-
 @NgModule({
-  declarations: [
-    PlayerEditComponent,
-    PlayerListComponent,
-    PlayerComponent
-  ],
+  declarations: [PlayerEditComponent, PlayerListComponent, PlayerComponent],
   imports: [
     CommonModule,
-    PlayerRoutingModule
-  ]
+    GetDownloadURLPipeModule,
+    PlayerRoutingModule,
+    SharedModule,
+  ],
 })
-export class PlayerModule { }
+export class PlayerModule {}

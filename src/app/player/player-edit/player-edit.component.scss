@@ -1,0 +1,21 @@
+._form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.mat-form-field-wrapper {
+  display: block;
+  width: 100%;
+}
+
+._image {
+  display: block;
+  margin: 0 auto;
+}
+
+._image-container {
+  margin-bottom: 16px;
+  width: 100%;
+}

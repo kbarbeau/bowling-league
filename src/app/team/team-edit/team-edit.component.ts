@@ -27,9 +27,9 @@ export class TeamEditComponent implements OnInit {
   teamsCollection: CollectionReference<DocumentData>;
 
   constructor(
+    private firestore: Firestore,
     private route: ActivatedRoute,
     private router: Router,
-    private firestore: Firestore,
     private TeamEditSvc: TeamEditService
   ) {
     this.teamsCollection = collection(this.firestore, 'teams');

@@ -1,1 +1,28 @@
-<p>player-list works!</p>
+<app-actions-group class="_actions-group" end>
+  <a mat-flat-button color="primary" [routerLink]="['/player/add']">Create Player</a>
+</app-actions-group>
+
+<table mat-table [dataSource]="players | async" class="_table">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">
+      <app-object-summary>
+        <img chipAvatar size="small" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+        <app-title>{{element.name}}</app-title>
+        <app-title size="small" type="subtitle">{{element.description}}</app-title>
+      </app-object-summary>
+    </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+        <a mat-button color="primary" [routerLink]="['edit/' + element.id]">Edit</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="showColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: showColumns;"></tr>
+</table>
