@@ -63,13 +63,13 @@ export class PlayerEditComponent implements OnInit {
       this.setupDocument(params['id']);
     } else {
       this.fg = this.PlayerEditSvc.initForm();
-      this.pageTitle = 'Create a Team';
+      this.pageTitle = 'Create a Player';
     }
   }
 
   setupDocument(id: string): void {
     this.id = id;
-    this.pageTitle = 'Edit Team';
+    this.pageTitle = 'Edit Player';
     this.playerDocument = doc(this.firestore, `players/${this.id}`);
 
     onSnapshot(this.playerDocument, (docSnap) => {
@@ -95,6 +95,6 @@ export class PlayerEditComponent implements OnInit {
       ? updateDoc(this.playerDocument, this.fg?.value)
       : addDoc(this.playersCollection, this.fg?.value);
 
-    this.router.navigate(['/player']);
+    this.router.navigateByUrl(`/player`);
   }
 }

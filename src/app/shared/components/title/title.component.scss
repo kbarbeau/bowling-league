@@ -6,6 +6,10 @@
   font-size: 16px;
 }
 
+:host.title--size-large {
+  font-size: 24px;
+}
+
 :host.title--type-subtitle {
   color: gray;
 }

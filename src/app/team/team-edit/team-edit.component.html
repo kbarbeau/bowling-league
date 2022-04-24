@@ -18,6 +18,13 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field *ngIf="(players$ | async) as playersList" appearance="outline">
+    <mat-label>Choose players</mat-label>
+    <mat-select formControlName="players" multiple>
+      <mat-option *ngFor="let player of playersList" [value]="player.id">{{ player.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <app-actions-group>
     <a mat-button color="primary" [routerLink]="['/team']">Cancel</a>
     <button mat-flat-button color="primary" type="submit">Submit</button>

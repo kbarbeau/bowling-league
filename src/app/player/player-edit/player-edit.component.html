@@ -1,6 +1,8 @@
-<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
-  <h2>{{ pageTitle }}</h2>
+<app-side-panel-header>
+  <app-title size="large">{{ pageTitle }}</app-title>
+</app-side-panel-header>
 
+<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
   <div class="_image-container">
     <img chip-avatar
       class="_image"

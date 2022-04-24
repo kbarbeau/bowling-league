@@ -1,8 +1,13 @@
+:host {
+  display: block;
+}
+
 ._form {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   max-width: 500px;
+  padding: 20px;
 }
 
 .mat-form-field-wrapper {

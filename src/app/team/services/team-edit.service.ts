@@ -13,12 +13,14 @@ export class TeamEditService {
       ? this.fb.group({
           description: [team.description],
           name: [team.name, Validators.required],
+          players: [team.players || [], Validators.required],
           sport: [team.sport, Validators.required],
         })
       : this.fb.group({
           description: [''],
           name: ['', Validators.required],
-          sport: ['', Validators.required],
+          players: [[], Validators.required],
+          sport: ['bowling', Validators.required],
         });
   }
 }
