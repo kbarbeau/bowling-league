@@ -1,5 +1,5 @@
 <app-actions-group class="_actions-group" end>
-  <a mat-flat-button color="primary" [routerLink]="['/player/add']">Create Player</a>
+  <a mat-flat-button color="primary" [routerLink]="['', { outlets: { side: 'player/add' } }]">Create Player</a>
 </app-actions-group>
 
 <table mat-table [dataSource]="players | async" class="_table">
@@ -7,11 +7,11 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <app-object-summary>
-        <img chipAvatar size="small" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+      <a app-object-summary [routerLink]="['', { outlets: { side: 'player/single/' + element.id } }]">
+        <img chip-avatar size="small" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
         <app-title>{{element.name}}</app-title>
         <app-title size="small" type="subtitle">{{element.description}}</app-title>
-      </app-object-summary>
+      </a>
     </td>
   </ng-container>
 
@@ -19,7 +19,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-        <a mat-button color="primary" [routerLink]="['edit/' + element.id]">Edit</a>
+        <a mat-button color="primary" [routerLink]="['', { outlets: { side: 'player/edit/' + element.id } }]">Edit</a>
     </td>
   </ng-container>
 

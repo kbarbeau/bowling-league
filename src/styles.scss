@@ -11,6 +11,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .mat-button:not(:last-child) {
   margin-right: 12px;
 }

@@ -8,7 +8,7 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-object-summary',
+  selector: 'app-object-summary, [app-object-summary]',
   templateUrl: './object-summary.component.html',
   styleUrls: ['./object-summary.component.scss'],
 })

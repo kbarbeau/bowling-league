@@ -15,7 +15,13 @@ import { SidePanelComponent } from './side-panel.component';
     SidePanelFooterComponent,
     SidePanelComponent,
   ],
-  exports: [MatSidenavModule, SidePanelComponent],
+  exports: [
+    MatSidenavModule,
+    SidePanelHeaderComponent,
+    SidePanelContentComponent,
+    SidePanelFooterComponent,
+    SidePanelComponent,
+  ],
   imports: [CommonModule, RouterModule, MatSidenavModule, SharedModule],
 })
 export class SidePanelModule {}

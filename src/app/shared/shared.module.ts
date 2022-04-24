@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActionsGroupComponent } from './actions-group/actions-group.component';
 import { ChipAvatarComponent } from './components/chip-avatar/chip-avatar.component';
@@ -40,6 +41,7 @@ import { TitleComponent } from './components/title/title.component';
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
+    MatTabsModule,
     MatToolbarModule,
     ObjectSummaryComponent,
     ReactiveFormsModule,
@@ -59,6 +61,7 @@ import { TitleComponent } from './components/title/title.component';
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
+    MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
   ],

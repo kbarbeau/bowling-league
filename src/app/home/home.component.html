@@ -4,4 +4,4 @@
   <input [formControl]="fileControl" type="file" (change)="onFileChosen($event)">
 </label>
 
-<img chipAvatar *ngIf="selectedFile" [src]="selectedFile.name | getDownloadURL">
+<img chip-avatar *ngIf="selectedFile" [src]="selectedFile.name | getDownloadURL">

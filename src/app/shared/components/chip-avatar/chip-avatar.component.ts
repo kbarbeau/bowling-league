@@ -8,7 +8,7 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'img[chipAvatar]',
+  selector: 'img[chip-avatar]',
   styleUrls: ['./chip-avatar.component.scss'],
   templateUrl: './chip-avatar.component.html',
 })
