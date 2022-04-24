@@ -1,0 +1,9 @@
+<img chip-avatar
+  *ngFor="let element of elements"
+  class="_avatar"
+  #tooltip="matTooltip"
+  [matTooltip]="element.name"
+  matTooltipPosition="above"
+  matTooltipHideDelay="30"
+  size="extra-small"
+  src="https://i.stack.imgur.com/34AD2.jpg">

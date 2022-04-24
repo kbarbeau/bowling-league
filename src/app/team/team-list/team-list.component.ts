@@ -1,21 +1,49 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import {
+  collection,
+  CollectionReference,
+  DocumentData,
+  Firestore,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Team } from '../interfaces/team';
 
 @Component({
   selector: 'app-team-list',
-  templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.scss'],
+  templateUrl: './team-list.component.html',
 })
 export class TeamListComponent implements OnInit {
-  @Input() showColumns: string[] = ['name', 'sport', 'actions']; // Used to show or hide columns
+  @Input() showColumns: string[] = ['name', 'sport', 'players', 'actions']; // Used to show or hide columns
 
-  teams: Observable<any>;
+  public teams: Team[] = [];
+  public teams$: Observable<Team[]>;
 
-  constructor(firestore: Firestore) {
-    const ref = collection(firestore, 'teams');
-    this.teams = collectionData(ref, { idField: 'id' });
+  private teamsColRef: CollectionReference<DocumentData>;
+
+  constructor(firestore: Firestore) {}
+
+  ngOnInit(): void {
+    this.setupDataBase();
+    this.setupTeams();
   }
 
-  ngOnInit(): void {}
+  setupDataBase(): void {
+    const db: Firestore = getFirestore();
+    this.teamsColRef = collection(db, 'teams');
+  }
+
+  setupTeams(): void {
+    const teamsQuery = query(this.teamsColRef, orderBy('name'));
+    onSnapshot(teamsQuery, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        this.teams = this.teams.concat(doc.data());
+      });
+      console.log(this.teams);
+    });
+  }
 }

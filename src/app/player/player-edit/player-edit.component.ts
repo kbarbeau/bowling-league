@@ -88,7 +88,6 @@ export class PlayerEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.imageFile);
     if (this.imageFile) this.storePlayerImage(this.imageFile);
 
     this.id

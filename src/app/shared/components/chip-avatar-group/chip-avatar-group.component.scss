@@ -1,0 +1,19 @@
+@import "~/src/app/shared/base/_variables.scss";
+
+:host {
+  align-items: center;
+  display: flex;
+}
+
+._avatar {
+  border: solid white 2px;
+  transition: border 0.3s;
+
+  &:hover {
+    border: solid $primary 2px;
+  }
+
+  &:not(:last-child) {
+    margin-right: -10px;
+  }
+}

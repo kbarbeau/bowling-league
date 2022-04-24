@@ -15,7 +15,8 @@ import {
 export class ChipAvatarComponent implements OnInit {
   @Input() class: string;
   @Input() radius: 'round' | 'square' = 'round';
-  @Input() size: 'extra-large' | 'large' | 'medium' | 'small' = 'medium';
+  @Input() size: 'extra-large' | 'extra-small' | 'large' | 'medium' | 'small' =
+    'medium';
 
   @HostBinding('class')
   get hostClasses(): string {
