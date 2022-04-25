@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { GetDownloadURLPipeModule } from '@angular/fire/compat/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -55,6 +56,7 @@ import { TitleComponent } from './components/title/title.component';
   imports: [
     CommonModule,
     FormsModule,
+    GetDownloadURLPipeModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,

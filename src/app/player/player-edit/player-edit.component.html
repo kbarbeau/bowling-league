@@ -4,11 +4,10 @@
 
 <form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
   <div class="_image-container">
-    <img chip-avatar
+    <app-chip-avatar *ngIf="fg.controls['image'].value && id; else uploadFile"
       class="_image"
-      *ngIf="fg.controls['image'].value && id; else uploadFile"
       size="large"
-      [src]="fg.controls['image'].value | getDownloadURL">
+      [image]="fg.controls['image'].value | getDownloadURL"></app-chip-avatar>
     <ng-template #uploadFile>
       <label>
         Picture

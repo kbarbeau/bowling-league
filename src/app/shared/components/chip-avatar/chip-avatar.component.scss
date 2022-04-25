@@ -1,5 +1,7 @@
 :host {
+  display: block;
   overflow: hidden;
+  position: relative;
   width: auto;
 }
 
@@ -13,25 +15,33 @@
 
 :host.chip-avatar--size-extra-small {
   height: 32px;
-  max-width: 32px;
+  width: 32px;
 }
 
 :host.chip-avatar--size-small {
-  height: 40px;
-  max-width: 40px;
+  height: 38px;
+  width: 38px;
 }
 
 :host.chip-avatar--size-medium {
   height: 60px;
-  max-width: 60px;
+  width: 60px;
 }
 
 :host.chip-avatar--size-large {
   height: 120px;
-  max-width: 120px;
+  width: 120px;
 }
 
 :host.chip-avatar--size-extra-large {
   height: 180px;
-  max-width: 180px;
+  width: 180px;
+}
+
+._image {
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

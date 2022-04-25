@@ -8,7 +8,7 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'img[chip-avatar]',
+  selector: 'app-chip-avatar',
   styleUrls: ['./chip-avatar.component.scss'],
   templateUrl: './chip-avatar.component.html',
 })
@@ -17,6 +17,7 @@ export class ChipAvatarComponent implements OnInit {
   @Input() radius: 'round' | 'square' = 'round';
   @Input() size: 'extra-large' | 'extra-small' | 'large' | 'medium' | 'small' =
     'medium';
+  @Input() image: string;
 
   @HostBinding('class')
   get hostClasses(): string {
