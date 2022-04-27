@@ -1,4 +1,4 @@
-# bowling-league
+# bowling-league APP
 
 This project used Angular 13 (FE) combined with Firestore 9 (BE & DB)
 
