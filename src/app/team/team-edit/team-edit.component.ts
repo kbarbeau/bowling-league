@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   collectionData,
   doc,
@@ -22,6 +22,7 @@ import { TSport } from '../interfaces/team';
 import { TeamEditService } from '../services/team-edit.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-team-edit',
   styleUrls: ['./team-edit.component.scss'],
   templateUrl: './team-edit.component.html',
@@ -101,6 +102,6 @@ export class TeamEditComponent implements OnInit {
       ? updateDoc(this.teamDocument, this.fg?.value)
       : addDoc(this.teamsCollection, this.fg?.value);
 
-    this.router.navigate(['/team']);
+    this.router.navigate(['', { outlets: { side: null } }]);
   }
 }

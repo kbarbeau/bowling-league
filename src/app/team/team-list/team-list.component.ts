@@ -39,11 +39,11 @@ export class TeamListComponent implements OnInit {
 
   setupTeams(): void {
     const teamsQuery = query(this.teamsColRef, orderBy('name'));
+
     onSnapshot(teamsQuery, (snapshot) => {
       snapshot.docs.forEach((doc) => {
-        this.teams = this.teams.concat(doc.data());
+        this.teams = this.teams.concat({ ...doc.data(), id: doc.id });
       });
-      console.log(this.teams);
     });
   }
 }

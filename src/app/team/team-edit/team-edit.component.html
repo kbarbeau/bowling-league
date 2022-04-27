@@ -1,6 +1,8 @@
-<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
-  <h2>{{ pageTitle }}</h2>
+<app-side-panel-header>
+  <app-title size="large">{{ pageTitle }}</app-title>
+</app-side-panel-header>
 
+<form *ngIf="fg" [formGroup]="fg" class="_form" (submit)="onSubmit()">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput autocomplete="off" formControlName="name" type="text">
@@ -25,8 +27,12 @@
     </mat-select>
   </mat-form-field>
 
-  <app-actions-group>
-    <a mat-button color="primary" [routerLink]="['/team']">Cancel</a>
-    <button mat-flat-button color="primary" type="submit">Submit</button>
-  </app-actions-group>
+  <app-side-panel-footer>
+    <app-actions-group>
+      <ng-container end>
+        <a mat-button color="primary" [routerLink]="['', { outlets: { side: null } }]">Cancel</a>
+        <button mat-flat-button color="primary" type="submit">Submit</button>
+      </ng-container>
+    </app-actions-group>
+  </app-side-panel-footer>
 </form>

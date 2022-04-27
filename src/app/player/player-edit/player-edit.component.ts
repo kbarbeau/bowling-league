@@ -94,6 +94,6 @@ export class PlayerEditComponent implements OnInit {
       ? updateDoc(this.playerDocument, this.fg?.value)
       : addDoc(this.playersCollection, this.fg?.value);
 
-    this.router.navigateByUrl(`/player`);
+    this.router.navigate(['', { outlets: { side: null } }]);
   }
 }

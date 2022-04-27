@@ -71,6 +71,6 @@ export class EventEditComponent implements OnInit {
       ? updateDoc(this.eventDocument, this.fg?.value)
       : addDoc(this.eventsCollection, this.fg?.value);
 
-    this.router.navigate(['/event']);
+    this.router.navigate(['', { outlets: { side: null } }]);
   }
 }

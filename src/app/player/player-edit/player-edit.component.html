@@ -26,8 +26,12 @@
     <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
 
-  <app-actions-group>
-    <a mat-button color="primary" [routerLink]="['/team']">Cancel</a>
-    <button mat-flat-button color="primary" type="submit">Submit</button>
-  </app-actions-group>
+  <app-side-panel-footer>
+    <app-actions-group>
+      <ng-container end>
+        <a mat-button color="primary" [routerLink]="['', { outlets: { side: null } }]">Cancel</a>
+        <button mat-flat-button color="primary" type="submit">Submit</button>
+      </ng-container>
+    </app-actions-group>
+  </app-side-panel-footer>
 </form>

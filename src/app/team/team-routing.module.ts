@@ -11,16 +11,25 @@ const routes: Routes = [
         component: TeamListComponent,
         path: '',
       },
+    ],
+    component: TeamComponent,
+    path: 'team',
+  },
+  {
+    children: [
       {
         component: TeamEditComponent,
+        data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'add',
       },
       {
         component: TeamEditComponent,
+        data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'edit/:id',
       },
     ],
     component: TeamComponent,
+    outlet: 'side',
     path: 'team',
   },
 ];

@@ -1,0 +1,8 @@
+:host {
+  bottom: 0;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  width: calc(100% - 40px);
+  width: -webkit-fill-available;
+}
