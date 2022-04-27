@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs/internal/Observable';
+import { ActivatedRoute, Data } from '@angular/router';
+import { Player } from '../interfaces/player';
 
 @Component({
   selector: 'app-player-list',
@@ -10,12 +10,19 @@ import { Observable } from 'rxjs/internal/Observable';
 export class PlayerListComponent implements OnInit {
   @Input() showColumns: string[] = ['name', 'actions']; // Used to show or hide columns
 
-  players: Observable<any>;
+  public players: Player[];
 
-  constructor(firestore: Firestore) {
-    const ref = collection(firestore, 'players');
-    this.players = collectionData(ref, { idField: 'id' });
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.setupObservers();
   }
 
-  ngOnInit(): void {}
+  setupData(data: Data): void {
+    this.players = data['resolverData'] as Player[];
+  }
+
+  setupObservers(): void {
+    this.route.data.subscribe((data: Data) => this.setupData(data));
+  }
 }

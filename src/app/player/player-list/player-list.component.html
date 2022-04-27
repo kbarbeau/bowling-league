@@ -2,7 +2,7 @@
   <a mat-flat-button color="primary" [routerLink]="['', { outlets: { side: 'player/add' } }]">Create Player</a>
 </app-actions-group>
 
-<table mat-table [dataSource]="players | async" class="_table">
+<table mat-table [dataSource]="players" class="_table">
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>

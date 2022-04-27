@@ -18,15 +18,10 @@ export class PlayerSingleComponent implements OnInit {
   }
 
   setupData(data: Data): void {
-    this.setupPlayer(data['resolverData']);
+    this.player = data['resolverData'] as Player;
   }
 
   setupObservers(): void {
     this.route.data.subscribe((data: Data) => this.setupData(data));
-  }
-
-  setupPlayer(player: Player): void {
-    this.player = player;
-    console.log('player', player);
   }
 }

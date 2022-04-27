@@ -5,7 +5,6 @@ import {
   DocumentReference,
   Firestore,
   getDoc,
-  getFirestore,
 } from '@angular/fire/firestore';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { filter, from, map, Observable } from 'rxjs';
@@ -15,13 +14,12 @@ import { Player } from '../interfaces/player';
   providedIn: 'root',
 })
 export class PlayerSingleResolver implements Resolve<Player> {
-  constructor() {}
+  constructor(private firestore: Firestore) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Player> {
-    const db: Firestore = getFirestore();
     const id: string = route.params['id'];
     const playerDocRef: DocumentReference<DocumentData> = doc(
-      db,
+      this.firestore,
       'players',
       id
     );
