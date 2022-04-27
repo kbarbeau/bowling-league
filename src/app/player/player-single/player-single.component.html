@@ -1,8 +1,8 @@
 <app-side-panel-header>
   <app-object-summary direction="column">
-    <app-chip-avatar size="large" image="https://i.stack.imgur.com/34AD2.jpg" thumbnail></app-chip-avatar>
-    <app-title>Kevin Barbeau</app-title>
-    <app-title type="subtitle">Leader</app-title>
+    <app-chip-avatar size="large" [image]="player.image ? (player.image | getDownloadURL) : 'https://i.stack.imgur.com/34AD2.jpg'" thumbnail></app-chip-avatar>
+    <app-title size="large">{{ player.name }}</app-title>
+    <app-title type="subtitle">{{ player.description }}</app-title>
   </app-object-summary>
 </app-side-panel-header>
 <mat-tab-group mat-align-tabs="center">

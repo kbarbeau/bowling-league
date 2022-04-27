@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerSingleComponent } from './player-single/player-single.component';
+import { PlayerSingleResolver } from './player-single/player-single.resolver';
 import { PlayerComponent } from './player.component';
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
         component: PlayerSingleComponent,
         data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'single/:id',
+        resolve: { resolverData: PlayerSingleResolver },
       },
     ],
     component: PlayerComponent,
