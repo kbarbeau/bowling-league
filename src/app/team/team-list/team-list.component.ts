@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
@@ -32,6 +33,7 @@ export class TeamListComponent implements OnDestroy, OnInit {
   private teamSnapshotUnsubscribe: Unsubscribe;
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private firestore: Firestore,
     private TeamModelSvc: TeamModelService
   ) {}
@@ -61,5 +63,6 @@ export class TeamListComponent implements OnDestroy, OnInit {
         ))
     );
     this.teams = freshCollection;
+    this.cdr.markForCheck();
   }
 }

@@ -18,8 +18,7 @@
     <ng-container matColumnDef="players">
       <th mat-header-cell *matHeaderCellDef>Players</th>
       <td mat-cell *matCellDef="let element">
-        <app-chip-avatar-group [elementsId]="element.players" type="players">
-        </app-chip-avatar-group>
+        {{ element.players.length }}
       </td>
     </ng-container>
 

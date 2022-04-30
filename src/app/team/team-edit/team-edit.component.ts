@@ -1,23 +1,25 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  collectionData,
-  Firestore,
-  getFirestore,
-} from '@angular/fire/firestore';
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { collectionData, doc, Firestore } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import {
   addDoc,
   collection,
   CollectionReference,
-  DocumentData,
   DocumentReference,
   updateDoc,
 } from 'firebase/firestore';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, from, Observable, Subject, takeUntil } from 'rxjs';
 import { Player } from 'src/app/player/interfaces/player';
 import { Team, TSport } from '../interfaces/team';
 import { TeamEditService } from '../services/team-edit.service';
+import { LABELS } from './team-edit.constants';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +27,7 @@ import { TeamEditService } from '../services/team-edit.service';
   styleUrls: ['./team-edit.component.scss'],
   templateUrl: './team-edit.component.html',
 })
-export class TeamEditComponent implements OnInit {
+export class TeamEditComponent implements OnDestroy, OnInit {
   public fg: FormGroup = this.TeamEditSvc.initForm();
   public id?: string = '';
   public isReady: boolean = false;
@@ -34,33 +36,40 @@ export class TeamEditComponent implements OnInit {
   public players$: Observable<Player[]> = EMPTY;
   public sports: TSport[] = ['bowling'];
 
-  private db: Firestore;
-  private teamDocument: DocumentReference<DocumentData>;
-  private teamsCollection: CollectionReference<DocumentData>;
+  private destroy$: Subject<boolean> = new Subject();
 
   constructor(
+    private _snackBar: MatSnackBar,
     private firestore: Firestore,
     private route: ActivatedRoute,
     private router: Router,
     private TeamEditSvc: TeamEditService
-  ) {
-    this.teamsCollection = collection(this.firestore, 'teams');
+  ) {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
-    this.db = getFirestore();
-
     this.setupObservers();
     this.setupPlayers();
+  }
 
-    console.log(this.fg.value);
+  addTeam(team: Team): void {
+    const teamColRef: CollectionReference<Team> = collection(
+      this.firestore,
+      'teams'
+    );
+
+    from(addDoc(teamColRef, team))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onSubmitSuccess());
   }
 
   setupPlayers(): void {
-    const playersColRef = collection(this.db, 'players');
+    const playersColRef = collection(this.firestore, 'players');
     this.players$ = collectionData(playersColRef, { idField: 'id' });
-
-    console.log(this.players$);
   }
 
   setupData(data: Data): void {
@@ -71,10 +80,10 @@ export class TeamEditComponent implements OnInit {
 
       this.fg = this.TeamEditSvc.initForm(team);
       this.id = team.id;
-      this.pageTitle = 'Edit Team';
+      this.pageTitle = LABELS.pageTitle.edit;
     } else {
       this.fg = this.TeamEditSvc.initForm();
-      this.pageTitle = 'Create a Team';
+      this.pageTitle = LABELS.pageTitle.create;
     }
   }
 
@@ -85,10 +94,31 @@ export class TeamEditComponent implements OnInit {
   onSubmit(): void {
     const teamForSave: Team = this.TeamEditSvc.formatForSave(this.fg?.value);
 
-    this.id
-      ? updateDoc(this.teamDocument, teamForSave as any)
-      : addDoc(this.teamsCollection, teamForSave);
+    this.id ? this.updateTeam(teamForSave) : this.addTeam(teamForSave);
+  }
 
+  onSubmitSuccess(): void {
+    const message: string = this.id
+      ? LABELS.submitSuccessfully.edit
+      : LABELS.submitSuccessfully.create;
+
+    this._snackBar.open(message, '', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
     this.router.navigate(['', { outlets: { side: null } }]);
+  }
+
+  updateTeam(team: Team): void {
+    const teamDocRef: DocumentReference<Team> = doc(
+      this.firestore,
+      'teams',
+      this.id
+    );
+
+    from(updateDoc(teamDocRef, team))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onSubmitSuccess());
   }
 }

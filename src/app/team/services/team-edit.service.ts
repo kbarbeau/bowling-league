@@ -19,7 +19,6 @@ export class TeamEditService {
   }
 
   initForm(team?: Team): FormGroup {
-    console.log(team);
     return team
       ? this.fb.group({
           description: [team.description],
