@@ -9,7 +9,6 @@ export class PlayerEditService {
   constructor(private fb: FormBuilder) {}
 
   initForm(player?: Player): FormGroup {
-    console.log(player);
     return player
       ? this.fb.group({
           description: [player.description],

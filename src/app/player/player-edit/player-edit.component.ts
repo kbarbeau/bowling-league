@@ -1,52 +1,59 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   addDoc,
   collection,
   CollectionReference,
   doc,
-  DocumentData,
   DocumentReference,
   Firestore,
-  onSnapshot,
   updateDoc,
 } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { from, Subject, takeUntil } from 'rxjs';
+import { Player } from '../interfaces/player';
 import { PlayerEditService } from '../services/player-edit.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-player-edit',
-  templateUrl: './player-edit.component.html',
   styleUrls: ['./player-edit.component.scss'],
+  templateUrl: './player-edit.component.html',
 })
 export class PlayerEditComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject();
   fg: FormGroup;
-  id?: string = '';
+  id?: string;
   imageFile: File;
   pageTitle: string = '';
-  playerDocument: DocumentReference<DocumentData>;
-  playersCollection: CollectionReference<DocumentData>;
 
   constructor(
-    private cdr: ChangeDetectorRef,
     private firestore: Firestore,
     private PlayerEditSvc: PlayerEditService,
     private route: ActivatedRoute,
     private router: Router,
     private storage: AngularFireStorage
-  ) {
-    this.playersCollection = collection(this.firestore, 'players');
-  }
+  ) {}
 
   ngOnInit(): void {
     this.setupObservers();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
+  addPlayer(): void {
+    const playerColRef: CollectionReference<Player> = collection(
+      this.firestore,
+      'players'
+    );
+
+    from(addDoc(playerColRef, this.fg?.value))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onSubmitSuccess());
   }
 
   imageHasChanged(event: any): void {
@@ -57,29 +64,23 @@ export class PlayerEditComponent implements OnInit {
     imageControl.markAsDirty();
   }
 
-  setupData(params: Params): void {
-    console.log(params);
-    if (params['id']) {
-      this.setupDocument(params['id']);
+  setupData(data: Data): void {
+    const isEditing: boolean = !!data['resolverData'];
+
+    if (isEditing) {
+      const player: Player = data['resolverData'];
+
+      this.fg = this.PlayerEditSvc.initForm(player);
+      this.id = player.id;
+      this.pageTitle = 'Edit Player';
     } else {
       this.fg = this.PlayerEditSvc.initForm();
       this.pageTitle = 'Create a Player';
     }
   }
 
-  setupDocument(id: string): void {
-    this.id = id;
-    this.pageTitle = 'Edit Player';
-    this.playerDocument = doc(this.firestore, `players/${this.id}`);
-
-    onSnapshot(this.playerDocument, (docSnap) => {
-      this.fg = this.PlayerEditSvc.initForm(docSnap.data());
-      this.cdr.markForCheck();
-    });
-  }
-
   setupObservers(): void {
-    this.route.params.subscribe((params) => this.setupData(params));
+    this.route.data.subscribe((data: Data) => this.setupData(data));
   }
 
   storePlayerImage(imagePath: File): void {
@@ -89,11 +90,22 @@ export class PlayerEditComponent implements OnInit {
 
   onSubmit(): void {
     if (this.imageFile) this.storePlayerImage(this.imageFile);
+    this.id ? this.updatePlayer() : this.addPlayer();
+  }
 
-    this.id
-      ? updateDoc(this.playerDocument, this.fg?.value)
-      : addDoc(this.playersCollection, this.fg?.value);
-
+  onSubmitSuccess(): void {
     this.router.navigate(['', { outlets: { side: null } }]);
+  }
+
+  updatePlayer(): void {
+    const playerDocRef: DocumentReference<Player> = doc(
+      this.firestore,
+      'players',
+      this.id
+    );
+
+    from(updateDoc(playerDocRef, this.fg?.value))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onSubmitSuccess());
   }
 }

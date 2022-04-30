@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
+import { PlayerEditResolver } from './player-edit/player-edit.resolver';
 import { PlayerListComponent } from './player-list/player-list.component';
-import { PlayerListResolver } from './player-list/player-list.resolver';
 import { PlayerSingleComponent } from './player-single/player-single.component';
 import { PlayerSingleResolver } from './player-single/player-single.resolver';
 import { PlayerComponent } from './player.component';
@@ -17,7 +17,6 @@ const routes: Routes = [
     ],
     component: PlayerComponent,
     path: 'player',
-    resolve: { resolverData: PlayerListResolver },
   },
   {
     children: [
@@ -30,6 +29,7 @@ const routes: Routes = [
         component: PlayerEditComponent,
         data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'edit/:id',
+        resolve: { resolverData: PlayerEditResolver },
       },
       {
         component: PlayerSingleComponent,
