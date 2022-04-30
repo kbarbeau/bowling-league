@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeamEditComponent } from './team-edit/team-edit.component';
+import { TeamEditResolver } from './team-edit/team-edit.resolver';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamComponent } from './team.component';
 
@@ -26,6 +27,7 @@ const routes: Routes = [
         component: TeamEditComponent,
         data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'edit/:id',
+        resolve: { resolverData: TeamEditResolver },
       },
     ],
     component: TeamComponent,

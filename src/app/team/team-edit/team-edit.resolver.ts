@@ -8,30 +8,30 @@ import {
 } from '@angular/fire/firestore';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { filter, from, map, Observable } from 'rxjs';
-import { Player } from '../interfaces/player';
-import { PlayerModelService } from '../services/player-model.service';
+import { Team } from '../interfaces/team';
+import { TeamModelService } from '../services/team-model.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlayerEditResolver implements Resolve<Player> {
+export class TeamEditResolver implements Resolve<Team> {
   constructor(
     private firestore: Firestore,
-    private PlayerModelSvc: PlayerModelService
+    private TeamModelSvc: TeamModelService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Player> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Team> {
     const id: string = route.params['id'];
-    const playerDocRef: DocumentReference<Player> = doc(
+    const teamDocRef: DocumentReference<Team> = doc(
       this.firestore,
-      'players',
+      'teams',
       id
     );
 
-    return from(getDoc(playerDocRef)).pipe(
+    return from(getDoc(teamDocRef)).pipe(
       filter((docSnap) => docSnap.exists()),
-      map((doc: DocumentSnapshot<Player>) =>
-        this.PlayerModelSvc.formatDocument(doc)
+      map((doc: DocumentSnapshot<Team>) =>
+        this.TeamModelSvc.formatDocument(doc)
       )
     );
   }

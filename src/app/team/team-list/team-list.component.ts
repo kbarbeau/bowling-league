@@ -1,49 +1,65 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   collection,
-  CollectionReference,
-  DocumentData,
   Firestore,
-  getFirestore,
   onSnapshot,
   orderBy,
   query,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  Unsubscribe,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { Team } from '../interfaces/team';
+import { TeamModelService } from '../services/team-model.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-team-list',
   styleUrls: ['./team-list.component.scss'],
   templateUrl: './team-list.component.html',
 })
-export class TeamListComponent implements OnInit {
+export class TeamListComponent implements OnDestroy, OnInit {
   @Input() showColumns: string[] = ['name', 'sport', 'players', 'actions']; // Used to show or hide columns
 
   public teams: Team[] = [];
-  public teams$: Observable<Team[]>;
 
-  private teamsColRef: CollectionReference<DocumentData>;
+  private teamSnapshotUnsubscribe: Unsubscribe;
 
-  constructor(firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private TeamModelSvc: TeamModelService
+  ) {}
+
+  ngOnDestroy(): void {
+    // Unsubscribe from snapshot
+    this.teamSnapshotUnsubscribe();
+  }
 
   ngOnInit(): void {
-    this.setupDataBase();
-    this.setupTeams();
+    this.setupObservers();
   }
 
-  setupDataBase(): void {
-    const db: Firestore = getFirestore();
-    this.teamsColRef = collection(db, 'teams');
+  setupObservers(): void {
+    this.teamSnapshotUnsubscribe = onSnapshot(
+      query(collection(this.firestore, 'teams'), orderBy('name')),
+      (querySnapshot) => this.collectionHasChanged(querySnapshot)
+    );
   }
 
-  setupTeams(): void {
-    const teamsQuery = query(this.teamsColRef, orderBy('name'));
-
-    onSnapshot(teamsQuery, (snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        this.teams = this.teams.concat({ ...doc.data(), id: doc.id });
-      });
-    });
+  collectionHasChanged(querySnapshot: QuerySnapshot<Team>): void {
+    let freshCollection: Team[] = [];
+    querySnapshot.forEach(
+      (doc: QueryDocumentSnapshot<Team>) =>
+        (freshCollection = freshCollection.concat(
+          this.TeamModelSvc.formatDocument(doc)
+        ))
+    );
+    this.teams = freshCollection;
   }
 }

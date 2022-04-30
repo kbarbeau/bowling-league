@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { doc, Firestore, getDoc } from '@angular/fire/firestore';
-import { getFirestore } from 'firebase/firestore';
 
 interface ChipAvatarItem {
   id: string;
@@ -14,18 +13,16 @@ interface ChipAvatarItem {
   styleUrls: ['./chip-avatar-group.component.scss'],
 })
 export class ChipAvatarGroupComponent implements OnInit {
-  @Input() arrayGroup: any[] = [];
+  @Input() elementsId: string[] = [];
+  @Input() type: 'players' | 'teams';
 
   elements: any[] = [];
 
-  constructor(firestore: Firestore) {}
+  constructor(private firestore: Firestore) {}
 
   ngOnInit(): void {
-    const db = getFirestore();
-
-    this.arrayGroup.forEach((element) => {
-      console.log(element.path, element.id);
-      const docRef = doc(db, 'players', element.id);
+    this.elementsId.forEach((id) => {
+      const docRef = doc(this.firestore, this.type, id);
       getDoc(docRef).then((doc) => {
         this.elements = this.elements.concat(doc.data());
       });

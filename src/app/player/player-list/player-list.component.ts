@@ -1,8 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   collection,
   Firestore,
   onSnapshot,
+  orderBy,
   query,
   QueryDocumentSnapshot,
   QuerySnapshot,
@@ -12,11 +19,12 @@ import { Player } from '../interfaces/player';
 import { PlayerModelService } from '../services/player-model.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-player-list',
-  templateUrl: './player-list.component.html',
   styleUrls: ['./player-list.component.scss'],
+  templateUrl: './player-list.component.html',
 })
-export class PlayerListComponent implements OnInit {
+export class PlayerListComponent implements OnDestroy, OnInit {
   @Input() showColumns: string[] = ['name', 'actions']; // Used to show or hide columns
 
   public players: Player[];
@@ -38,7 +46,7 @@ export class PlayerListComponent implements OnInit {
 
   setupObservers(): void {
     this.playerSnapshotUnsubscribe = onSnapshot(
-      query(collection(this.firestore, 'players')),
+      query(collection(this.firestore, 'players'), orderBy('name')),
       (querySnapshot) => this.collectionHasChanged(querySnapshot)
     );
   }

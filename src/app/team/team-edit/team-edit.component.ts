@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   collectionData,
-  doc,
   Firestore,
   getFirestore,
-  onSnapshot,
 } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import {
   addDoc,
   collection,
@@ -18,7 +16,7 @@ import {
 } from 'firebase/firestore';
 import { EMPTY, Observable } from 'rxjs';
 import { Player } from 'src/app/player/interfaces/player';
-import { TSport } from '../interfaces/team';
+import { Team, TSport } from '../interfaces/team';
 import { TeamEditService } from '../services/team-edit.service';
 
 @Component({
@@ -63,44 +61,33 @@ export class TeamEditComponent implements OnInit {
     this.players$ = collectionData(playersColRef, { idField: 'id' });
 
     console.log(this.players$);
-
-    // onSnapshot(playersColRef, (snapshot) => {
-    //   snapshot.docs.forEach(
-    //     (doc: QueryDocumentSnapshot<DocumentData>) =>
-    //       (this.players = this.players.concat([doc.data()]))
-    //   );
-    // });
   }
 
-  setupData(params: Params): void {
-    if (params['id']) {
-      this.setupDocument(params['id']);
+  setupData(data: Data): void {
+    const isEditing: boolean = !!data['resolverData'];
+
+    if (isEditing) {
+      const team: Team = data['resolverData'];
+
+      this.fg = this.TeamEditSvc.initForm(team);
+      this.id = team.id;
+      this.pageTitle = 'Edit Team';
     } else {
+      this.fg = this.TeamEditSvc.initForm();
       this.pageTitle = 'Create a Team';
-      this.isReady = true;
     }
   }
 
-  setupDocument(id: string): void {
-    this.id = id;
-    this.pageTitle = 'Edit Team';
-    this.teamDocument = doc(this.firestore, `teams/${this.id}`);
-
-    onSnapshot(this.teamDocument, (docSnap) => {
-      this.fg.patchValue(this.TeamEditSvc.initForm(docSnap.data()).value);
-    });
-  }
-
   setupObservers(): void {
-    this.route.params.subscribe((params) => this.setupData(params));
-
-    this.fg.valueChanges.subscribe((res) => console.log(res));
+    this.route.data.subscribe((data: Data) => this.setupData(data));
   }
 
   onSubmit(): void {
+    const teamForSave: Team = this.TeamEditSvc.formatForSave(this.fg?.value);
+
     this.id
-      ? updateDoc(this.teamDocument, this.fg?.value)
-      : addDoc(this.teamsCollection, this.fg?.value);
+      ? updateDoc(this.teamDocument, teamForSave as any)
+      : addDoc(this.teamsCollection, teamForSave);
 
     this.router.navigate(['', { outlets: { side: null } }]);
   }
