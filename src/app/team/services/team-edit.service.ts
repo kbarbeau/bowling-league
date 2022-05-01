@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team } from '../interfaces/team';
 
@@ -7,7 +6,7 @@ import { Team } from '../interfaces/team';
   providedIn: 'root',
 })
 export class TeamEditService {
-  constructor(private fb: FormBuilder, private firestore: Firestore) {}
+  constructor(private fb: FormBuilder) {}
 
   formatForSave(fg): Team {
     return {

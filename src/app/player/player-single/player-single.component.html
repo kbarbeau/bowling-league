@@ -6,6 +6,12 @@
   </app-object-summary>
 </app-side-panel-header>
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Stats">Content 2</mat-tab>
-  <mat-tab label="Teams">Content 1</mat-tab>
+  <mat-tab label="Stats">
+    <app-side-panel-content>Stats Coming Soon!!</app-side-panel-content>
+  </mat-tab>
+  <mat-tab label="Teams">
+    <app-side-panel-content>
+      <app-team-list [editable]="false" [query]="teamQuery" [showColumns]="['name', 'sport', 'players']"></app-team-list>
+    </app-side-panel-content>
+  </mat-tab>
 </mat-tab-group>

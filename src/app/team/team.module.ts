@@ -9,6 +9,7 @@ import { TeamComponent } from './team.component';
 
 @NgModule({
   declarations: [TeamComponent, TeamListComponent, TeamEditComponent],
+  exports: [TeamListComponent],
   imports: [CommonModule, SharedModule, SidePanelModule, TeamRoutingModule],
 })
 export class TeamModule {}

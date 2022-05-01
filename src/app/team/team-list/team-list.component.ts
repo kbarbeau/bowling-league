@@ -11,6 +11,7 @@ import {
   Firestore,
   onSnapshot,
   orderBy,
+  Query,
   query,
   QueryDocumentSnapshot,
   QuerySnapshot,
@@ -26,6 +27,11 @@ import { TeamModelService } from '../services/team-model.service';
   templateUrl: './team-list.component.html',
 })
 export class TeamListComponent implements OnDestroy, OnInit {
+  @Input() editable: boolean = true; // Remove Add Button
+  @Input() query: Query = query(
+    collection(this.firestore, 'teams'),
+    orderBy('name')
+  ); // Allow use to create custom query
   @Input() showColumns: string[] = ['name', 'sport', 'players', 'actions']; // Used to show or hide columns
 
   public teams: Team[] = [];
@@ -48,9 +54,8 @@ export class TeamListComponent implements OnDestroy, OnInit {
   }
 
   setupObservers(): void {
-    this.teamSnapshotUnsubscribe = onSnapshot(
-      query(collection(this.firestore, 'teams'), orderBy('name')),
-      (querySnapshot) => this.collectionHasChanged(querySnapshot)
+    this.teamSnapshotUnsubscribe = onSnapshot(this.query, (querySnapshot) =>
+      this.collectionHasChanged(querySnapshot)
     );
   }
 

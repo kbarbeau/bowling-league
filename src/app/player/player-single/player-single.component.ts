@@ -1,4 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  collection,
+  Firestore,
+  Query,
+  query,
+  where,
+} from '@angular/fire/firestore';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Player } from '../interfaces/player';
 
@@ -10,8 +17,9 @@ import { Player } from '../interfaces/player';
 })
 export class PlayerSingleComponent implements OnInit {
   public player: Player;
+  public teamQuery: Query;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private firestore: Firestore, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.setupObservers();
@@ -19,6 +27,10 @@ export class PlayerSingleComponent implements OnInit {
 
   setupData(data: Data): void {
     this.player = data['resolverData'] as Player;
+    this.teamQuery = query(
+      collection(this.firestore, 'teams'),
+      where('players', 'array-contains', this.player.id)
+    );
   }
 
   setupObservers(): void {
