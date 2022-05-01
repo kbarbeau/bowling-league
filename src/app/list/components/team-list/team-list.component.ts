@@ -17,8 +17,8 @@ import {
   QuerySnapshot,
   Unsubscribe,
 } from '@angular/fire/firestore';
-import { Team } from '../interfaces/team';
-import { TeamModelService } from '../services/team-model.service';
+import { Team } from 'src/app/team/interfaces/team';
+import { TeamModelService } from 'src/app/team/services/team-model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

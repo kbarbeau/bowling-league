@@ -1,4 +1,4 @@
-<app-actions-group class="_actions-group" end>
+<app-actions-group *ngIf="editable" class="_actions-group" end>
   <a mat-flat-button color="primary" [routerLink]="['', { outlets: { side: 'player/add' } }]">Create Player</a>
 </app-actions-group>
 
@@ -19,7 +19,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-        <a mat-button color="primary" [routerLink]="['', { outlets: { side: 'player/edit/' + element.id } }]">Edit</a>
+        <a *ngIf="editable" mat-button color="primary" [routerLink]="['', { outlets: { side: 'player/edit/' + element.id } }]">Edit</a>
     </td>
   </ng-container>
 

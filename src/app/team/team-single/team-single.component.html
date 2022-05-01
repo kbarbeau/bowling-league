@@ -1,0 +1,16 @@
+<app-side-panel-header>
+  <app-object-summary direction="column">
+    <app-title size="large">{{ team.name }}</app-title>
+    <app-title type="subtitle">{{ team.description }}</app-title>
+  </app-object-summary>
+</app-side-panel-header>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Stats">
+    <app-side-panel-content>Stats Coming Soon!!</app-side-panel-content>
+  </mat-tab>
+  <mat-tab label="Players">
+    <app-side-panel-content>
+      <app-player-list [editable]="false" [query]="playerQuery" [showColumns]="['name']"></app-player-list>
+    </app-side-panel-content>
+  </mat-tab>
+</mat-tab-group>

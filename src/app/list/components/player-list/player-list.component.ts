@@ -11,13 +11,14 @@ import {
   Firestore,
   onSnapshot,
   orderBy,
+  Query,
   query,
   QueryDocumentSnapshot,
   QuerySnapshot,
   Unsubscribe,
 } from '@angular/fire/firestore';
-import { Player } from '../interfaces/player';
-import { PlayerModelService } from '../services/player-model.service';
+import { Player } from 'src/app/player/interfaces/player';
+import { PlayerModelService } from 'src/app/player/services/player-model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +27,11 @@ import { PlayerModelService } from '../services/player-model.service';
   templateUrl: './player-list.component.html',
 })
 export class PlayerListComponent implements OnDestroy, OnInit {
+  @Input() editable: boolean = true; // Remove Add Button
+  @Input() query: Query = query(
+    collection(this.firestore, 'players'),
+    orderBy('name')
+  ); // Allow use to create custom query
   @Input() showColumns: string[] = ['name', 'actions']; // Used to show or hide columns
 
   public players: Player[];
@@ -47,9 +53,8 @@ export class PlayerListComponent implements OnDestroy, OnInit {
   }
 
   setupObservers(): void {
-    this.playerSnapshotUnsubscribe = onSnapshot(
-      query(collection(this.firestore, 'players'), orderBy('name')),
-      (querySnapshot) => this.collectionHasChanged(querySnapshot)
+    this.playerSnapshotUnsubscribe = onSnapshot(this.query, (querySnapshot) =>
+      this.collectionHasChanged(querySnapshot)
     );
   }
 

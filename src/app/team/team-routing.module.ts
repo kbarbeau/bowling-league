@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TeamListComponent } from '../list/components/team-list/team-list.component';
 import { TeamEditComponent } from './team-edit/team-edit.component';
 import { TeamEditResolver } from './team-edit/team-edit.resolver';
-import { TeamListComponent } from './team-list/team-list.component';
+import { TeamSingleComponent } from './team-single/team-single.component';
+import { TeamSingleResolver } from './team-single/team-single.resolver';
 import { TeamComponent } from './team.component';
 
 const routes: Routes = [
@@ -28,6 +30,12 @@ const routes: Routes = [
         data: { sidePanelMode: 'over', sidePanelPos: 'end' },
         path: 'edit/:id',
         resolve: { resolverData: TeamEditResolver },
+      },
+      {
+        component: TeamSingleComponent,
+        data: { sidePanelMode: 'over', sidePanelPos: 'end' },
+        path: 'single/:id',
+        resolve: { resolverData: TeamSingleResolver },
       },
     ],
     component: TeamComponent,

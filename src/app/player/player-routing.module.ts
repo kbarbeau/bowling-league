@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PlayerListComponent } from '../list/components/player-list/player-list.component';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerEditResolver } from './player-edit/player-edit.resolver';
-import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerSingleComponent } from './player-single/player-single.component';
 import { PlayerSingleResolver } from './player-single/player-single.resolver';
 import { PlayerComponent } from './player.component';
