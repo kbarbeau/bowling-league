@@ -1,0 +1,12 @@
+<form class="_form" [formGroup]="fg" (submit)="signIn()">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" name="email" type="email">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" name="password" type="password">
+  </mat-form-field>
+  <button mat-flat-button class="_auth-btn" color="primary" type="submit">Sign In</button>
+  <button mat-button class="_auth-btn" color="primary" type="button" (click)="signInWithGoogle()">Sign In with Google</button>
+</form>

@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+._auth-btn {
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+._form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mat-form-field {
+  display: block;
+  width: 100%;
+}

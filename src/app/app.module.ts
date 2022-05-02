@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 import { HomeComponent } from './home/home.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
@@ -34,8 +35,9 @@ import { TeamModule } from './team/team.module';
     HomeComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    BrowserModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     AngularFireStorageModule,
