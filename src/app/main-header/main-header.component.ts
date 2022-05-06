@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthComponent } from '../auth/auth.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-main-header',
+  styleUrls: ['./main-header.component.scss'],
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.scss']
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent {
+  constructor(private dialog: MatDialog) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  openLoginPopup() {
+    this.dialog.open(AuthComponent);
   }
-
 }

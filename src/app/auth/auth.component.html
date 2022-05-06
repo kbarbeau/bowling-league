@@ -3,6 +3,9 @@
     <app-sign-in></app-sign-in>
   </mat-tab>
   <mat-tab label="Login">
-    Login
+    <app-reset-password *ngIf="isResettingPassword; else showLogin" (askToResetPassword)="askToResetPassword($event)"></app-reset-password>
+    <ng-template #showLogin>
+      <app-login (askToResetPassword)="askToResetPassword($event)"></app-login>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

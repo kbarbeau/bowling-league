@@ -1,1 +1,13 @@
-<p>login works!</p>
+<form class="_form" [formGroup]="fg" (submit)="login()">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" name="email" type="email">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" name="password" type="password">
+  </mat-form-field>
+  <button class="_reset-btn" (click)="askToResetPassword.emit(true)">Reset Password</button>
+  <button mat-flat-button class="_auth-btn" color="primary" type="submit">Login</button>
+  <button mat-button class="_auth-btn" color="primary" type="button" (click)="loginWithGoogle()">Login with Google</button>
+</form>

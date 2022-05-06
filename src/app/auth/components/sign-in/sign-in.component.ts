@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/compat/app';
 
 @Component({
@@ -15,7 +16,11 @@ export class SignInComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  constructor(private auth: AngularFireAuth, private fb: FormBuilder) {}
+  constructor(
+    private auth: AngularFireAuth,
+    private fb: FormBuilder,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,15 +31,26 @@ export class SignInComponent implements OnInit {
           this.fg.value.email,
           this.fg.value.password
         )
-        .then((res) => console.log(res))
+        .then((userInfo: firebase.auth.UserCredential) =>
+          this.signInSuccess(userInfo)
+        )
         .catch((err) => console.error(err));
     } else {
       // TODO :: Display error messages
     }
   }
 
+  signInSuccess(userInfo?: firebase.auth.UserCredential): void {
+    console.log(userInfo);
+    this.dialog.closeAll();
+  }
+
   signInWithGoogle() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.auth
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then((userInfo: firebase.auth.UserCredential) =>
+        this.signInSuccess(userInfo)
+      );
   }
 
   logout() {
