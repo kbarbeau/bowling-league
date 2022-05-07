@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, Subject, takeUntil } from 'rxjs';
+import { AuthService } from './shared/services/auth.service';
 
 const DEFAULT_SIDE_PANEL_MODE: 'over' | 'push' | 'side' = 'over';
 const DEFAULT_SIDE_PANEL_POS: 'end' | 'start' = 'end';
@@ -18,6 +20,8 @@ export class AppComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private auth: AngularFireAuth,
+    private authSvc: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {}

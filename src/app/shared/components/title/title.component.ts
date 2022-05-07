@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnInit,
+  Renderer2,
 } from '@angular/core';
 
 @Component({
@@ -14,6 +16,7 @@ import {
 })
 export class TitleComponent implements OnInit {
   @Input() class: string;
+  @Input() color: string; // Color code
   @Input() size: 'extra-large' | 'large' | 'medium' | 'small' = 'medium';
   @Input() type: 'subtitle' | 'title' = 'title';
 
@@ -26,7 +29,10 @@ export class TitleComponent implements OnInit {
     ].join(' ');
   }
 
-  constructor() {}
+  constructor(private element: ElementRef, private renderer: Renderer2) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.color)
+      this.renderer.setStyle(this.element.nativeElement, 'color', this.color);
+  }
 }

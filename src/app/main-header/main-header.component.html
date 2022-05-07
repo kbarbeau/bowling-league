@@ -3,5 +3,14 @@
     <mat-icon>menu</mat-icon>
   </a>
   <span class="_title">My Bowling League</span>
-  <button mat-flat-button (click)="openLoginPopup()">Connection</button>
+
+  <div>
+    <app-object-summary *ngIf="user; else showConnection" direction="row-reverse">
+      <app-chip-avatar size="small" [image]="user.image || 'https://i.stack.imgur.com/34AD2.jpg'" thumbnail></app-chip-avatar>
+          <app-title color="#fff">{{user.name}}</app-title>
+    </app-object-summary>
+    <ng-template #showConnection>
+      <button mat-flat-button (click)="openLoginPopup()">Connection</button>
+    </ng-template>
+  </div>
 </mat-toolbar>

@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import {
+  AngularFireAuthGuard,
+  hasCustomClaim,
+} from '@angular/fire/compat/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { PlayerListComponent } from '../list/components/player-list/player-list.component';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
@@ -6,6 +10,8 @@ import { PlayerEditResolver } from './player-edit/player-edit.resolver';
 import { PlayerSingleComponent } from './player-single/player-single.component';
 import { PlayerSingleResolver } from './player-single/player-single.resolver';
 import { PlayerComponent } from './player.component';
+
+const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Routes = [
   {
@@ -21,13 +27,23 @@ const routes: Routes = [
   {
     children: [
       {
+        canActivate: [AngularFireAuthGuard],
         component: PlayerEditComponent,
-        data: { sidePanelMode: 'over', sidePanelPos: 'end' },
+        data: {
+          authGuardPipe: adminOnly,
+          sidePanelMode: 'over',
+          sidePanelPos: 'end',
+        },
         path: 'add',
       },
       {
+        canActivate: [AngularFireAuthGuard],
         component: PlayerEditComponent,
-        data: { sidePanelMode: 'over', sidePanelPos: 'end' },
+        data: {
+          authGuardPipe: adminOnly,
+          sidePanelMode: 'over',
+          sidePanelPos: 'end',
+        },
         path: 'edit/:id',
         resolve: { resolverData: PlayerEditResolver },
       },

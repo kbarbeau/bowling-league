@@ -14,7 +14,7 @@ import {
 })
 export class ObjectSummaryComponent implements OnInit {
   @Input() class: string;
-  @Input() direction: 'column' | 'row' = 'row';
+  @Input() direction: 'column' | 'row' | 'row-reverse' = 'row';
 
   @HostBinding('class')
   get hostClasses(): string {

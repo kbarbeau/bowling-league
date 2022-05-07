@@ -20,6 +20,14 @@
   }
 }
 
+:host.object-summary--direction-row-reverse {
+  flex-direction: row-reverse;
+
+  ._content {
+    margin-right: 12px;
+  }
+}
+
 ._content {
   display: flex;
   flex-direction: column;

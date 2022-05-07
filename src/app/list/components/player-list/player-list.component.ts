@@ -17,6 +17,7 @@ import {
   QuerySnapshot,
   Unsubscribe,
 } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/player/interfaces/player';
 import { PlayerModelService } from 'src/app/player/services/player-model.service';
 
@@ -40,7 +41,8 @@ export class PlayerListComponent implements OnDestroy, OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private firestore: Firestore,
-    private PlayerModelSvc: PlayerModelService
+    private PlayerModelSvc: PlayerModelService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnDestroy(): void {
@@ -56,6 +58,8 @@ export class PlayerListComponent implements OnDestroy, OnInit {
     this.playerSnapshotUnsubscribe = onSnapshot(this.query, (querySnapshot) =>
       this.collectionHasChanged(querySnapshot)
     );
+
+    this.route.data.subscribe((res) => console.log(res));
   }
 
   collectionHasChanged(querySnapshot: QuerySnapshot<Player>): void {
